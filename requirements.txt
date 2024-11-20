@@ -1,0 +1,9 @@
+jupyter
+requests
+types-requests
+pylance
+mypy
+langchain
+anthropic
+langchain-anthropic
+anthropic
