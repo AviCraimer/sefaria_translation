@@ -1,62 +1,101 @@
-# translator.py
-from langchain.prompts import PromptTemplate
-from langchain_anthropic import ChatAnthropic
-from anthropic import Anthropic
-from typing import Iterator
-from sefaria_api import format_text
+# translate.py
 from text_reference import TextReference, ReferenceLevel
 from translation_prompt import translation_prompt
-from secret import anthropic_api_key
-
-client = Anthropic(api_key=anthropic_api_key)
-
-
-def ask_claude(prompt: str) -> str:
-    return (
-        client.messages.create(
-            max_tokens=1024,
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt,
-                }
-            ],
-            model="claude-3-5-sonnet-latest",
-        )
-        .content[0]
-        .text
-    )
+from claude import ask_claude
+from typing import Optional
+from dataclasses import dataclass
 
 
-print(ask_claude("Hi there, are you fishing?"))
+@dataclass
+class TranslationState:
+    text_ref: TextReference
+    chapter: list[str]
+    translations: list[str]
 
 
 class ChapterTranslator:
     def __init__(self, text_ref: TextReference, chapter: list[str]) -> None:
-        self.text_ref = text_ref
-        self.text_ref.passage_num = 1
-        self.chapter = chapter
+        if not chapter:
+            raise ValueError("Chapter cannot be empty")
+        if text_ref.chapter_num is None:
+            raise ValueError("Chapter number must be specified in text_ref")
 
-    def translate_passage(self) -> str:
+        self.text_ref: TextReference = text_ref
+        self.chapter: list[str] = chapter
+        self.translations: list[str] = []
+
+    @property
+    def is_complete(self) -> bool:
+        return len(self.translations) == len(self.chapter)
+
+    @property
+    def next_passage_num(self) -> Optional[int]:
+        """
+        Returns the 1-based index of the next passage to translate, or None if complete
+        Note: Passage numbers are 1-based to match traditional text references
+        """
+        if self.is_complete:
+            return None
+        if len(self.translations) > len(self.chapter):
+            raise ValueError(
+                "Something is wrong, more translations than passages in chapter."
+            )
+        zero_based_index = len(self.translations)
+        return zero_based_index + 1  # Convert to 1-based passage number
+
+    def save_state(self) -> TranslationState:
+        return TranslationState(
+            text_ref=self.text_ref, chapter=self.chapter, translations=self.translations
+        )
+
+    @classmethod
+    def from_state(cls, state: TranslationState) -> "ChapterTranslator":
+        translator = cls(state.text_ref, state.chapter)
+        translator.translations = state.translations
+        return translator
+
+    def translate_passage(self) -> Optional[str]:
         """Translate a single passage with full chapter context"""
+        self.text_ref.passage_num = self.next_passage_num
+        if self.text_ref.passage_num is None:
+            # Translation is complete
+            return None
         prompt = translation_prompt(self.text_ref, self.chapter)
-
         response = ask_claude(prompt)
+        self.translations.append(response)
         return response
 
-    # def translate_chapter(
-    #     self, text_array: list[str], title: str, section_num: int, chapter_num: int
-    # ) -> Iterator[str]:
-    #     """
-    #     Translates each passage in the chapter, yielding results one at a time
-    #     """
-    #     # Get full chapter context
-    #     context = format_text(text_array)
+    def get_translations(self) -> list[tuple[str, str]]:
+        """Returns list of (original, translation) pairs for completed translations"""
+        return list(zip(self.chapter[: len(self.translations)], self.translations))
 
-    #     # Translate each passage
-    #     for passage in text_array:
-    #         if passage.strip():  # Skip empty passages
-    #             translation = self.translate_passage(
-    #                 passage, context, title, section_num, chapter_num
-    #             )
-    #             yield translation
+    def translate_chapter(self) -> list[tuple[str, str]]:
+        """
+        Translates all remaining passages in the chapter
+
+        Returns:
+            List of (original, translation) pairs for the entire chapter
+        """
+        try:
+            while not self.is_complete:
+                translation = self.translate_passage()
+                if translation is None:
+                    print(f"Translation of {self.text_ref.display_text(2)} complete.")
+                    break
+                print(f"Passage {len(self.translations)} translated.")
+            return self.get_translations()
+        except Exception as e:
+            error_message = str(e).lower()
+            if (
+                "overloaded_error" in error_message
+                or "error code: 529" in error_message
+            ):
+                raise Exception("Anthropic server is busy, try again later.") from e
+            else:
+                # Include partial translations in the error
+                completed_translations = self.get_translations()
+                raise Exception(
+                    f"Translation failed at passage {self.next_passage_num}."
+                    f"Completed {len(completed_translations)}/{len(self.chapter)} passages. "
+                    f"Error: {str(e)}"
+                ) from e

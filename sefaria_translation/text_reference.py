@@ -97,6 +97,24 @@ class TextReference:
 
         return "_".join(parts)
 
+    def get_file_name(self, level: ReferenceLevel = 2) -> str:
+        """
+        Creates a snake_case filename (without extension) based on reference
+
+        Example: "pardes_rimmonim_6_5"
+        """
+        parts = [self.title.lower()]
+
+        parts.append(str(self.section_num))
+
+        if level >= 2 and self.chapter_num is not None:
+            parts.append(str(self.chapter_num))
+
+        if level >= 3 and self.passage_num is not None:
+            parts.append(str(self.passage_num))
+
+        return "_".join(parts)
+
 
 # Usage examples:
 if __name__ == "__main__":

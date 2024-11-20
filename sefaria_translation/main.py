@@ -1,4 +1,4 @@
-# Usage in main.py:
+# main.py:
 from sefaria_api import fetch_sefaria_text
 from translate import ChapterTranslator
 from text_reference import TextReference
@@ -14,13 +14,10 @@ def main() -> None:
     # Initialize translator
     translator = ChapterTranslator(text_ref, chapter)
 
-    original = chapter[0]
-    translation = translator.translate_passage()
+    translator.translate_chapter()
 
-    print(f"\nPassage {1}:")
-    print(f"Original: {original}")
-    print(f"Translation: {translation}")
-    print("-" * 80)
+    for translatedPassage in translator.translations:
+        print(translatedPassage + "\n" + ("-" * 80) + "\n")
 
 
 if __name__ == "__main__":
