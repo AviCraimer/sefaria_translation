@@ -2,6 +2,7 @@
 from sefaria_api import fetch_sefaria_text
 from translate import ChapterTranslator
 from text_reference import TextReference
+from translation_save import SaveTranslation
 
 
 def main() -> None:
@@ -15,9 +16,10 @@ def main() -> None:
     translator = ChapterTranslator(text_ref, chapter)
 
     translator.translate_chapter()
-
-    for translatedPassage in translator.translations:
-        print(translatedPassage + "\n" + ("-" * 80) + "\n")
+    save = SaveTranslation(translator)
+    save.save_to_html()
+    # for translatedPassage in translator.translations:
+    #     print(translatedPassage + "\n" + ("-" * 80) + "\n")
 
 
 if __name__ == "__main__":

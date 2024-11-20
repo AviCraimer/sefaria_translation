@@ -1,4 +1,5 @@
 # translate.py
+from numpy import isin
 from text_reference import TextReference, ReferenceLevel
 from translation_prompt import translation_prompt
 from claude import ask_claude
@@ -49,8 +50,11 @@ class ChapterTranslator:
         )
 
     @classmethod
-    def from_state(cls, state: TranslationState) -> "ChapterTranslator":
-        translator = cls(state.text_ref, state.chapter)
+    def from_state(
+        Cls, state: TranslationState | "ChapterTranslator"
+    ) -> "ChapterTranslator":
+        """Gets new chapter translator from translation state or an existing chapter translator"""
+        translator = Cls(state.text_ref, state.chapter)
         translator.translations = state.translations
         return translator
 
