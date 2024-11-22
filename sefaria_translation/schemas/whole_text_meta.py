@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Literal
 from sefaria_translation.schemas.jagged_array import JaggedArrayNodeSchema
 from sefaria_translation.schemas.base_schema import BaseSchema
-from sefaria_translation.schemas.sefaria_index import SefariaIndex
+from sefaria_translation.sefaria_api.sefaria_index import SefariaIndex
 
 
 class WholeTextMeta(BaseSchema):

@@ -1,4 +1,4 @@
-from sefaria_translation.fetch_sefaria_text import format_text
+from sefaria_translation.sefaria_api.fetch_sefaria_text import format_text
 from sefaria_translation.text_reference import PassageReference
 
 

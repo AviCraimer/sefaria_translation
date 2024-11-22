@@ -1,5 +1,5 @@
 # main.py:
-from sefaria_translation.fetch_sefaria_text import fetch_sefaria_text
+from sefaria_translation.sefaria_api.fetch_sefaria_text import fetch_sefaria_text
 from sefaria_translation.chapter_translator import ChapterTranslator
 from sefaria_translation.text_reference import ChapterReference
 from sefaria_translation.save_translation import SaveTranslation

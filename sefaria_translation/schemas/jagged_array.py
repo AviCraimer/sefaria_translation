@@ -10,7 +10,7 @@ from typing import (
     TypeAlias,
 )
 from pydantic import BaseModel, Field, computed_field, model_validator
-from sefaria_translation.schemas.sefaria_index import (
+from sefaria_translation.sefaria_api.sefaria_index import (
     SefariaTitleNode,
     SefariJaggedArrayNodeSchema,
 )
@@ -31,12 +31,13 @@ def get_titles(
     return (english, hebrew)
 
 
-# Our version of the schema
 class JaggedArrayNodeSchema(BaseModel):
+    """This stores the schema for a single content node."""
+
     depth: int
     section_names: list[str]
-    content_block_title_english: Optional[str]
-    content_block_title_hebrew: Optional[str]
+    content_block_title_english: Optional[str] = None
+    content_block_title_hebrew: Optional[str] = None
     type: Literal["JaggedArrayNodeSchema"] = "JaggedArrayNodeSchema"
 
     @classmethod
@@ -54,25 +55,44 @@ class JaggedArrayNodeSchema(BaseModel):
             content_block_title_hebrew=primary_titles[1],
         )
 
+    def slice(self, to_depth: int, l: list[any]):
+        depth = self.depth
+        if 1 > to_depth > depth:
+            raise ValueError(
+                f"Cannot slice jagged array node schema of depth {depth} with to_depth={to_depth}"
+            )
+        if len(l) != depth:
+            raise ValueError(
+                f"Cannot slice a depth {depth} list when list is length {len(l)}"
+            )
+
+        index = depth - to_depth
+        return l[index:]
+
+    def slice_schema(self, to_depth: int):
+        section_names = self.slice(to_depth, self.section_names)
+
+        title = None
+        if self.content_block_title_english is not None:
+            title = f"{section_names[0]}_of_{self.content_block_title_english}"
+
+        return JaggedArrayNodeSchema(
+            depth=to_depth,
+            section_names=section_names,
+            content_block_title_english=title,
+        )
+
 
 # Define a non-recursive type for validation
 # Type definition for up to 5 levels of depth
-Depth1 = list[str]
+Depth1 = str
 Depth2 = list[Depth1]
 Depth3 = list[Depth2]
 Depth4 = list[Depth3]
 Depth5 = list[Depth4]
+Depth6 = list[Depth5]
 
-FiniteDepthJaggedArray = Union[str, Depth1, Depth2, Depth3, Depth4, Depth5]
-
-# class JaggedArrayType:
-#     @classmethod
-#     def validate(cls, v: Union[str, FiniteDepthArray]) -> Union[str, FiniteDepthArray]:
-#         if isinstance(v, str):
-#             return v
-#         if isinstance(v, list):
-#             return [cls.validate(item) for item in v]
-#         raise ValueError(f"Expected string or list, got {type(v)}")
+FiniteDepthJaggedArray = Union[Depth1, Depth2, Depth3, Depth4, Depth5, Depth6]
 
 
 def validate_jagged_array(v: FiniteDepthJaggedArray) -> FiniteDepthJaggedArray:

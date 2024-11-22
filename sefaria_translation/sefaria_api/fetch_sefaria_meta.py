@@ -1,7 +1,7 @@
 # api_client.py
 import requests
 from sefaria_translation.schemas.whole_text_meta import WholeTextMeta
-from sefaria_translation.schemas.sefaria_index import SefariaIndex
+from sefaria_translation.sefaria_api.sefaria_index import SefariaIndex
 
 
 index_endpoint: str = "https://www.sefaria.org/api/v2/raw/index"
@@ -31,7 +31,10 @@ if __name__ == "__main__":
         # print(result["versions"][0]["text"])
         # cleaned = clean_text( result)
         metadata = fetch_sefaria_meta("Pardes_Rimmonim", "Moses ben Jacob Cordovero")
-        print(metadata)
+        main_text_schema = metadata.text_schema[1]
+        print(main_text_schema)
+        print(main_text_schema.slice_schema(2))
+        print(main_text_schema.slice_schema(1))
         # chapter1 = fetch_sefaria_text(TextReference("Pardes_Rimmonim", 30, 1, 4))
         # passage4 = fetch_sefaria_text(TextReference("Pardes_Rimmonim", 30, 1, 4), 3)
         # print(chapter1[3] == passage4)
