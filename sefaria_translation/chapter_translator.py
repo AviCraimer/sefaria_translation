@@ -1,28 +1,28 @@
 # translate.py
-from numpy import isin
-from text_reference import TextReference, ReferenceLevel
-from translation_prompt import translation_prompt
-from claude import ask_claude
-from typing import Optional
-from dataclasses import dataclass
-
-
-@dataclass
-class TranslationState:
-    text_ref: TextReference
-    chapter: list[str]
-    translations: list[str]
+from ast import Pass
+from sefaria_translation.text_reference import (
+    TextReference,
+    ChapterReference,
+    PassageReference,
+)
+from sefaria_translation.translation_prompt import translation_prompt
+from sefaria_translation.claude import ask_claude
+from typing import Optional, Callable
 
 
 class ChapterTranslator:
-    def __init__(self, text_ref: TextReference, chapter: list[str]) -> None:
+    def __init__(
+        self,
+        chapter_ref: ChapterReference,
+        chapter: list[str],
+        llm_generation: Callable[[str], str] = ask_claude,
+    ) -> None:
         if not chapter:
             raise ValueError("Chapter cannot be empty")
-        if text_ref.chapter_num is None:
-            raise ValueError("Chapter number must be specified in text_ref")
 
-        self.text_ref: TextReference = text_ref
+        self.chapter_ref: ChapterReference = chapter_ref
         self.chapter: list[str] = chapter
+        self.llm_generation = llm_generation
         self.translations: list[str] = []
 
     @property
@@ -44,32 +44,26 @@ class ChapterTranslator:
         zero_based_index = len(self.translations)
         return zero_based_index + 1  # Convert to 1-based passage number
 
-    def save_state(self) -> TranslationState:
-        return TranslationState(
-            text_ref=self.text_ref, chapter=self.chapter, translations=self.translations
-        )
-
     @classmethod
-    def from_state(
-        Cls, state: TranslationState | "ChapterTranslator"
-    ) -> "ChapterTranslator":
-        """Gets new chapter translator from translation state or an existing chapter translator"""
-        translator = Cls(state.text_ref, state.chapter)
+    def clone(Cls, state: "ChapterTranslator") -> "ChapterTranslator":
+        """Gets new chapter translator from an existing chapter translator"""
+        translator = Cls(state.chapter_ref, state.chapter)
         translator.translations = state.translations
         return translator
 
     def translate_passage(self) -> Optional[str]:
         """Translate a single passage with full chapter context"""
-        self.text_ref.passage_num = self.next_passage_num
-        if self.text_ref.passage_num is None:
+        self.chapter_ref.passage_num = self.next_passage_num
+        if self.chapter_ref.passage_num is None:
             # Translation is complete
             return None
-        prompt = translation_prompt(self.text_ref, self.chapter)
-        response = ask_claude(prompt)
+        passage_ref = PassageReference.from_ref(self.chapter_ref)
+        prompt = translation_prompt(passage_ref, self.chapter)
+        response = self.llm_generation(prompt)
         self.translations.append(response)
         return response
 
-    def get_translations(self) -> list[tuple[str, str]]:
+    def zip_translations(self) -> list[tuple[str, str]]:
         """Returns list of (original, translation) pairs for completed translations"""
         return list(zip(self.chapter[: len(self.translations)], self.translations))
 
@@ -84,12 +78,15 @@ class ChapterTranslator:
             while not self.is_complete:
                 translation = self.translate_passage()
                 if translation is None:
-                    print(f"Translation of {self.text_ref.display_text(2)} complete.")
+                    print(
+                        f"Translation of {self.chapter_ref.display_text(2)} complete."
+                    )
                     break
                 print(f"Passage {len(self.translations)} translated.")
-            return self.get_translations()
+            return self.zip_translations()
         except Exception as e:
             error_message = str(e).lower()
+            # TODO: This is Anthropic specific, in future I may want to make the error handling use dependency injection, but for now this is ok.
             if (
                 "overloaded_error" in error_message
                 or "error code: 529" in error_message
@@ -97,7 +94,7 @@ class ChapterTranslator:
                 raise Exception("Anthropic server is busy, try again later.") from e
             else:
                 # Include partial translations in the error
-                completed_translations = self.get_translations()
+                completed_translations = self.zip_translations()
                 raise Exception(
                     f"Translation failed at passage {self.next_passage_num}."
                     f"Completed {len(completed_translations)}/{len(self.chapter)} passages. "

@@ -7,3 +7,5 @@ langchain
 anthropic
 langchain-anthropic
 anthropic
+pydantic
+pytest

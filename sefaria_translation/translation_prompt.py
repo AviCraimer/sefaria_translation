@@ -1,8 +1,8 @@
-from sefaria_api import format_text
-from text_reference import TextReference
+from sefaria_translation.fetch_sefaria_text import format_text
+from sefaria_translation.text_reference import PassageReference
 
 
-def translation_prompt(text_ref: TextReference, chapter: list[str]) -> str:
+def translation_prompt(text_ref: PassageReference, chapter: list[str]) -> str:
     """
     Creates a translation prompt for a specific passage within its chapter context
 

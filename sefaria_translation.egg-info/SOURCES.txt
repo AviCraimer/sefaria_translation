@@ -1,0 +1,20 @@
+README.md
+pyproject.toml
+setup.py
+sefaria_translation/__init__.py
+sefaria_translation/chapter_translator.py
+sefaria_translation/claude.py
+sefaria_translation/fetch_sefaria_meta.py
+sefaria_translation/fetch_sefaria_text.py
+sefaria_translation/main.py
+sefaria_translation/save_translation.py
+sefaria_translation/secret.py
+sefaria_translation/text_reference.py
+sefaria_translation/translation_prompt.py
+sefaria_translation/translation_save_OLD_HTML.py
+sefaria_translation.egg-info/PKG-INFO
+sefaria_translation.egg-info/SOURCES.txt
+sefaria_translation.egg-info/dependency_links.txt
+sefaria_translation.egg-info/top_level.txt
+tests/ save_translation.test.py
+tests/__init__.py

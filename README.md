@@ -4,7 +4,11 @@
 
 ## To Install Packages:
 
-pip install -r requirements.txt
+Install external packages
+`pip install -r requirements.txt`
+
+Install my own package
+`pip install -e .`
 
 ## To Run Jupyter Notebook
 

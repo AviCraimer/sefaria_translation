@@ -1,7 +1,9 @@
-from dataclasses import dataclass
-from typing import Optional, Literal, Text
+from dataclasses import dataclass, field
+from typing import Optional, Literal, Union, TypeVar
 
 ReferenceLevel = Literal[1, 2, 3]
+
+T = TypeVar("T", bound="TextReference")
 
 
 @dataclass
@@ -15,6 +17,7 @@ class TextReference:
     section_name: str = "Section"
     chapter_name: str = "Chapter"
     passage_name: str = "Passage"
+    _valid_levels: list[ReferenceLevel] = field(default_factory=lambda: [1, 2, 3])
 
     def __post_init__(self) -> None:
         """Validate after initialization"""
@@ -27,6 +30,7 @@ class TextReference:
         if self.passage_num is not None and self.passage_num < 1:
             raise ValueError("Passage number must be positive")
 
+    @property
     def ref_level(self) -> ReferenceLevel:
         count: ReferenceLevel = 1
         if self.chapter_num is not None:
@@ -34,6 +38,33 @@ class TextReference:
         if self.chapter_num is not None and self.passage_num is not None:
             count = 3
         return count
+
+    @property
+    def has_valid_level(self) -> bool:
+        return self.ref_level in self._valid_levels
+
+    @classmethod
+    def from_ref(
+        cls: type[T],
+        ref: Union["TextReference", "ChapterReference", "PassageReference"],
+    ) -> T:
+        """Create reference from reference."""
+        try:
+            new_ref = cls(
+                title=ref.title,
+                section_num=ref.section_num,
+                chapter_num=ref.chapter_num,
+                passage_num=ref.passage_num,
+                section_name=ref.section_name,
+                chapter_name=ref.chapter_name,
+                passage_name=ref.passage_name,
+            )
+        except:
+            level_name = cls.__name__.split("Reference")[0].lower()
+            raise ValueError(
+                f"Cannot create {cls.__name__}, {level_name} number is missing"
+            )
+        return new_ref
 
     def display_text(
         # TODO: Add author to text reference
@@ -48,7 +79,7 @@ class TextReference:
         """
         parts = []
         if level == 0:
-            level = self.ref_level()
+            level = self.ref_level
         if include_title:
             parts.append(self.title.replace("_", " "))
 
@@ -116,6 +147,25 @@ class TextReference:
         return "_".join(parts)
 
 
+@dataclass
+class ChapterReference(TextReference):
+    chapter_num: int  # Override to make it required (non-Optional)
+    _valid_levels: list[ReferenceLevel] = field(default_factory=lambda: [2, 3])
+
+    def __post_init__(self) -> None:
+        """Stricter validation for chapter reference"""
+        if not self.has_valid_level:
+            raise ValueError(
+                f"Reference Level is invalid for {self.__class__.__name__}"
+            )
+
+
+@dataclass
+class PassageReference(ChapterReference):
+    passage_num: int  # Override to make it required
+    _valid_levels: list[ReferenceLevel] = field(default_factory=lambda: [3])
+
+
 # Usage examples:
 if __name__ == "__main__":
     # Basic usage
@@ -130,6 +180,9 @@ if __name__ == "__main__":
         section_name="Gate",
         chapter_name="Portal",
     )
+
+    gate_chapter_ref = ChapterReference.from_ref(gate_ref)  # Typed As Chapter Ref
+    # gate_passage_ref = PassageReference.from_ref(gate_ref)  # Should through error
 
     print(gate_ref.display_text())  # "Pardes Rimmonim, Gate 6, Portal 5"
     print(gate_ref.display_text(1))  # "Pardes Rimmonim, Gate 6"

@@ -1,8 +1,8 @@
 # save_translation.py
 from datetime import datetime
 from pathlib import Path
-from translate import TranslationState, ChapterTranslator
-from typing import Literal, Optional
+from sefaria_translation.chapter_translator import TranslationState, ChapterTranslator
+from typing import Literal, Optional, Union
 
 
 def create_html_template(
@@ -27,8 +27,10 @@ def create_html_template(
         </style>
     </head>
     <body>
-        <h3>{title}</h3>
-        {content}
+        <main>
+            <h3>{title}</h3>
+            {content}
+        </main>
         {disclaimer}
     </body>
     </html>
@@ -42,13 +44,14 @@ class SaveTranslation:
     BASE_DIR: Path = Path("saved_translations")
     _global_overwrite: Optional[Literal["Y", "N"]] = None
 
-    def __init__(self, state: TranslationState | ChapterTranslator):
+    def __init__(self, state: Union[TranslationState, ChapterTranslator]):
         self.translator = ChapterTranslator.from_state(state)
         # Create directory structure on initialization
         self.get_title_dir().mkdir(parents=True, exist_ok=True)
 
     def get_title_dir(self) -> Path:
-        return self.BASE_DIR / self.translator.text_ref.title.lower()
+        title: Path = self.translator.text_ref.title.lower()
+        return self.BASE_DIR / title
 
     def get_save_path(self, filename: bool = True) -> Path:
         """
