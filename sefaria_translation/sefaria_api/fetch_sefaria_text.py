@@ -1,7 +1,7 @@
 # api_client.py
 import requests
 import re
-from typing import TypedDict
+from typing import TypedDict, Union
 from sefaria_translation.text_reference import TextReference, ReferenceLevel
 from pathlib import Path
 
@@ -37,14 +37,14 @@ def fetch_sefaria_index(title: str) -> SefariaIndex:
         raise Exception(f"Failed to fetch from Sefaria API: {str(e)}")
 
 
-# level defaults to chapter
-def fetch_sefaria_text(text_ref: TextReference, level: ReferenceLevel = 2) -> list[str]:
+def fetch_sefaria_text(text_ref: TextReference) -> Union[list[str], list[list[str]]]:
     """
     Fetches text from Sefaria API
 
     Returns:
         dict: API response data
     """
+    level = text_ref.ref_level
     url = f"{texts_endpoint}/{text_ref.to_url_path(level)}"
 
     try:

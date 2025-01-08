@@ -13,10 +13,11 @@ def main() -> None:
     chapter: list[str] = fetch_sefaria_text(text_ref)
 
     # Initialize translator
-    # translator = ChapterTranslator(text_ref, chapter)
+    translator = ChapterTranslator(text_ref, chapter)
 
-    # translator.translate_chapter()
-    # save = SaveTranslation(translator)
+    translation = translator.translate_chapter()
+    print(translation)
+    save = SaveTranslation(translator)
     # save.save_to_html()
     # for translatedPassage in translator.translations:
     #     print(translatedPassage + "\n" + ("-" * 80) + "\n")

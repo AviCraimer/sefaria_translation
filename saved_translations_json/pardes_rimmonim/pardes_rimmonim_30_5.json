@@ -1,0 +1,147 @@
+{
+  "title": "Pardes Rimmonim",
+  "gate_num": 30,
+  "chapter_num": 5,
+  "translation": [
+    {
+      "hebrew": "ענין התמורה להאיר אות באות ברל\"א שערים כאשר נבאר. ויש חלוק בין צרוף לתמורה כגבוה שמים על הארץ. והטעם כי הצירוף תשתפכנה אבני קדש ולא תתהפכנה מאותיות אלו לאותיות אלו זולת שהם בראש הצירוף ואותם שהם בראש הצירוף הם אותם שבסוף הצרוף אלא שהוא כמו גלגל המתגלגל מראשו לסופו ומסופו לראשו ונעשה ראש סוף וסוף ראש, ראש תוך ותוך ראש, סוף תוך ותוך סוף. והאותיות לעולם לא ישתנו ואף אם ישתנו בסדרם אבל התמורה הוא חילוף האותיות בכ\"ב אלפא ביתות כאשר נבאר כמו המשל שם ידו\"ד אלד\"ינו ידו\"ד המתחלף באבג\"ד כוז\"ו במוכס\"ו כו\"זו. ובאתב\"ש מצפ\"ץ תכצ\"מטפ מצפ\"ץ וכן בשאר אלפ\"א ביתו\"ת עד כ\"ב. ודרך זה משובחת מהגימטריא כאשר נבאר כי בגימטריא יתחלפו האותיות ואף שאין מספר אלו כמספר א' כי לפעמים משלש יעשו ארבע ומארבע שלש כאשר נבאר:",
+      "english": "The matter of substitution is to illuminate letter by letter through the 231 gates, as we will explain. There is a difference between permutation and substitution as high as heaven is above earth. The reason is that in permutation, the holy stones are poured out but do not transform from these letters to those letters, except that those at the beginning of the permutation are the same as those at the end of the permutation, like a wheel that rolls from its beginning to its end and from its end to its beginning, making the beginning the end and the end the beginning, the beginning the middle and the middle the beginning, the end the middle and the middle the end. The letters never change, even if their order changes, but substitution is the exchange of letters through the 22 alphabets as we will explain, for example the Name YHVH ELOHENU YHVH changes in ABGD to KUZU BMUKSZ KUZU, and in ATBASH to MTZPTZ TKTZMP MTZPTZ, and so on with the rest of the alphabets up to 22. This method is more praiseworthy than gematria, as we will explain, because in gematria the letters are exchanged even though their numbers are not equal, for sometimes three become four and four become three, as we will explain."
+    },
+    {
+      "hebrew": "אלו הם כ\"ב אלפ\"א שבהם יתחלפו האותיות כאשר באו בספר יצירה וקראם רל\"א שערים מפני שהם רל\"א זוגות:",
+      "english": "These are the 22 alphabets in which the letters are exchanged, as they appear in Sefer Yetzirah, and they are called 231 gates because they consist of 231 pairs:"
+    },
+    {
+      "hebrew": "<b>אל בת גש דר הק וץ זף חע טס ין כמ:</b>",
+      "english": "<b>Al Bat Gash Dar Hak Vatz Zaf Cha'a Tas Yan Kam</b>"
+    },
+    {
+      "hebrew": "<b>אב גת דש הר וק זץ חף חע יס כן למ:</b>",
+      "english": "<b>AB GT DSh HR VK TzZ ChF ChA YS KN LM</b>"
+    },
+    {
+      "hebrew": "<b>אג דת הש ור זק חץ טף יע כס לן במ:</b>",
+      "english": "<b>Ag, Dat, Hash, Var, Zak, Chetz, Taf, Ya', Kas, Lan, Bam</b>"
+    },
+    {
+      "hebrew": "<b>אד בג הת וש זר חק טץ יף כע לס מן:</b>",
+      "english": "<b>Aleph-Dalet, Bet-Gimel, Heh-Tav, Vav-Shin, Zayin-Resh, Chet-Kuf, Tet-Tzadi, Yod-Peh, Kaf-Ayin, Lamed-Samech, Mem-Nun</b>"
+    },
+    {
+      "hebrew": "<b>אה בר ות זש חר טק ין כף לע מס גן:</b>",
+      "english": "<b>Ah Br Vt Zsh Chr Tk Yn Kf La Ms Gn</b>"
+    },
+    {
+      "hebrew": "<b>או בה גד זת חש טג יק כץ לף מע נס:</b>",
+      "english": "<b>Alef-Vav, Bet-Hey, Gimel-Dalet, Zayin-Tav, Chet-Shin, Tet-Gimel, Yod-Kuf, Kaf-Tzadi, Lamed-Fey, Mem-Ayin, Nun-Samech</b>"
+    },
+    {
+      "hebrew": "<b>אז בו גה חת טש יד כק לץ חף נע דס:</b>",
+      "english": "<b>Aleph-Zayin, Bet-Vav, Gimel-Heh, Chet-Tav, Tet-Shin, Yod-Dalet, Kaf-Kuf, Lamed-Tzadi, Chet-Feh, Nun-Ayin, Dalet-Samech</b>"
+    },
+    {
+      "hebrew": "<b>אח בז גו דה טת יש כר לק מץ נף סע:</b>",
+      "english": "<b>Alef-Chet Bet-Zayin Gimel-Vav Dalet-Hei Tet-Tav Yod-Shin Kaf-Resh Lamed-Kuf Mem-Tzadi Nun-Fei Samech-Ayin</b>"
+    },
+    {
+      "hebrew": "<b>אט בח גז דו ית כש לר מק נץ סף הע:</b>",
+      "english": "<b>Alef-Tet, Bet-Chet, Gimel-Zayin, Dalet-Vav, Yud-Tet, Kaf-Shin, Lamed-Resh, Mem-Kuf, Nun-Tzadi, Samech-Peh, Heh-Ayin</b>"
+    },
+    {
+      "hebrew": "<b>אי בט גח דז הו כת לש מר נק סץ עף:</b>",
+      "english": "<b>Aleph-Yod, Bet-Tet, Gimel-Het, Dalet-Zayin, Hey-Vav, Kaf-Tav, Lamed-Shin, Mem-Resh, Nun-Kuf, Samekh-Tzadi, Ayin-Pey</b>"
+    },
+    {
+      "hebrew": "<b>אב בי גט דח הז לת מש נר סק עץ יף:</b>",
+      "english": "<b>Aleph-Bet, Bet-Yod, Gimel-Tet, Dalet-Het, Hey-Zayin, Lamed-Tav, Mem-Shin, Nun-Resh, Samekh-Kuf, Ayin-Tzadi, Yod-Peh</b>"
+    },
+    {
+      "hebrew": "<b>אל בך גי דט הח וז מת נש סר עק פץ:</b>",
+      "english": "<b>AL BK GY DT HCh VZ MT NSh SR 'AK PTs</b>"
+    },
+    {
+      "hebrew": "<b>אמ בל גס די הט זה צת סש ער פק זן:</b>",
+      "english": "<b>Alef-Mem, Bet-Lamed, Gimel-Samech, Dalet-Yod, Hey-Tet, Zayin-Hey, Tzadi-Tav, Samech-Shin, Ayin-Resh, Peh-Kuf, Zayin-Nun</b>"
+    },
+    {
+      "hebrew": "<b>אג בם גך דק הי וט זח סת עש פר צק:</b>",
+      "english": "<b>Alef-Gimel, Bet-Mem, Gimel-Khaf, Dalet-Kuf, He-Yod, Vav-Tet, Zayin-Het, Samekh-Tav, Ayin-Shin, Pe-Resh, Tzadi-Kuf</b>"
+    },
+    {
+      "hebrew": "<b>אס בג גמ דל הס וי זט עת פש צר חק:</b>",
+      "english": "<b>Alef-Samekh, Bet-Gimel, Gimel-Mem, Dalet-Lamed, He-Samekh, Vav-Yod, Zayin-Tet, Ayin-Tav, Pe-Shin, Tzadi-Resh, Chet-Kuf</b>"
+    },
+    {
+      "hebrew": "<b>אע בס גנ דמ הל וכ זי חט פת צש קר:</b>",
+      "english": "<b>Ayin-Samekh-Nun-Mem-Lamed-Khaf-Yod-Tet-Tav-Shin-Resh</b>"
+    },
+    {
+      "hebrew": "<b>אף בע גס דנ המ ול זכ חי צת קש טר:</b>",
+      "english": "<b>Alef-Peh Bet-Ayin Gimel-Samekh Dalet-Nun Heh-Mem Vav-Lamed Zayin-Khaf Het-Yod Tzadi-Tav Kuf-Shin Tet-Resh</b>"
+    },
+    {
+      "hebrew": "<b>אץ בף גע דס הג ומ זל חס טי קת רש:</b>",
+      "english": "<b>Alef-Tzadi Bet-Fei Gimel-Ayin Dalet-Samech Hei-Gimel Vav-Mem Zayin-Lamed Chet-Samech Tet-Yod Kuf-Tav Reish-Shin</b>"
+    },
+    {
+      "hebrew": "<b>אק בץ גף דע הס וג זם חל טב רת יש:</b>",
+      "english": "<b>Alef-Kuf, Bet-Tzadi, Gimel-Fei, Dalet-Ayin, Hei-Samech, Vav-Gimel, Zayin-Mem, Chet-Lamed, Tet-Bet, Reish-Tav, Yod-Shin</b>"
+    },
+    {
+      "hebrew": "<b>אר בק גץ דף הע וס זג חמ טל יב שת:</b>",
+      "english": "<b>Alef-Resh, Bet-Kuf, Gimel-Tzadi, Dalet-Feh, Heh-Ayin, Vav-Samech, Zayin-Gimel, Chet-Mem, Tet-Lamed, Yod-Bet, Shin-Tav</b>"
+    },
+    {
+      "hebrew": "<b>אש בר גק דן הף וע זס חג טמ יל כת:</b>",
+      "english": "<b>Alef-Shin, Bet-Resh, Gimel-Kuf, Dalet-Nun, Heh-Peh, Vav-Ayin, Zayin-Samekh, Chet-Gimel, Tet-Mem, Yod-Lamed, Kaf-Tav</b>"
+    },
+    {
+      "hebrew": "<b>את בש גר דק הץ וף זע חס טן ימ כל:</b>",
+      "english": "<b>Alef-Tav, Bet-Shin, Gimel-Resh, Dalet-Kuf, Heh-Tzadi, Vav-Peh, Zayin-Ayin, Chet-Samech, Tet-Nun, Yod-Mem, Kaf-Lamed</b>"
+    },
+    {
+      "hebrew": "ע\"כ נשלמו רל\"א שערים שבספר יצירה ובהם מתחלפות האותיות כל אשר יצטרף אל החילוף השמות והכחות:",
+      "english": "Thus are completed the 231 gates that are in Sefer Yetzirah, and through them the letters are exchanged for all that combines with the permutation of the Names and Powers:"
+    },
+    {
+      "hebrew": "עוד יש אלפא ביתות אחרות מצאנו מפוזרות בין דברי הספרים הישנים ואלו הם הראשונה האלפא ביתא הישר והיא זאת:",
+      "english": "There are additional alphabets that we found scattered among the writings of the ancient books, and these are they - the first being the straight alphabet, which is this:"
+    },
+    {
+      "hebrew": "<b>אב גד הו זח טי כל מג סע פצ קר שת מנצפך:</b>",
+      "english": "<b>Alef-Bet, Gimel-Dalet, Hey-Vav, Zayin-Chet, Tet-Yod, Kaf-Lamed, Mem-Gimel, Samech-Ayin, Peh-Tzadi, Kuf-Resh, Shin-Tav, [final letters] Mem-Nun-Tzadi-Peh-Kaf</b>"
+    },
+    {
+      "hebrew": "<b>אחס בטע גיף דכץ הלק ומרפנים ואחור ואלו הן: זנשת:</b>",
+      "english": "<b>ACHS BT'A GYF DKTz HLK WM faces and backs and these are: ZNSHT</b>"
+    },
+    {
+      "hebrew": "<b>איק בנר גלש דמת הנך וסס זען חפף טצץ:</b>",
+      "english": "<b>Aik Banr Gals Damt Hanch Vsas Za'an Chfaf Tatzatz</b>"
+    },
+    {
+      "hebrew": "<b>אל בם גן דס הע וף זץ חק טר יש כת:</b>",
+      "english": "<b>Al Bam Gan Das Ha Vaf Zatz Chak Tar Yash Kat</b>"
+    },
+    {
+      "hebrew": "<b>אט בח גז דו הג סס על פך צי קת רש:</b>",
+      "english": "<b>AT BaḤ GaZ DaV HaG SaS AL PaKH TZI KaT RaSH</b>"
+    },
+    {
+      "hebrew": "<b>תשרק צפעם נמלך יטחז והדגבא:</b> ",
+      "english": "<b>tashrak tzafam namlakh yatḥaz vehadegba:</b>"
+    },
+    {
+      "hebrew": "ומלבד הרל\"א האלה מצאנו עוד בפי בעלי החכמה רל\"א שערים כתובים פנים ואחור אלו הן  ",
+      "english": "And besides these 231 [gates], we have found in the words of the sages another 231 gates written forwards and backwards, which are these"
+    },
+    {
+      "hebrew": "",
+      "english": "I notice the passage to translate appears to be empty in both instances in your input. Could you please share the specific Hebrew text passage you'd like me to translate? Once you provide the passage, I'll be happy to translate it following your guidelines."
+    },
+    {
+      "hebrew": "",
+      "english": "I don't see a specific passage marked for translation between the <passage-to-translate> tags. Please provide the specific Hebrew text you would like me to translate, and I will help translate it following the provided guidelines."
+    }
+  ]
+}

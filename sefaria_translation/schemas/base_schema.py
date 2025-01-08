@@ -35,6 +35,11 @@ class TranslatedChapter(BaseSchema):
         """Load chapter from JSON file"""
         return cls.model_validate_json(file_path.read_text())
 
+# WIP
+# class WholeTextMeta(BaseSchema):
+#     type: Literal["Whole Text"]
+#     title: str
+#     sefaria_id: str
 
 # The chapter content Will be written to files so we define meta-data in a root file.
 # class SectionMeta(BaseSchema):

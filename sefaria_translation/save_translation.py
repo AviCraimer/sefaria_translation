@@ -4,8 +4,8 @@ from pathlib import Path
 from sefaria_translation.schemas.base_schema import (
     TranslatedChapter,
     TranslatedPassage,
-    WholeTextMeta,
 )
+from sefaria_translation.schemas.whole_text_meta import WholeTextMeta
 from datetime import datetime
 from sefaria_translation.text_reference import TextReference
 from sefaria_translation.chapter_translator import ChapterTranslator
