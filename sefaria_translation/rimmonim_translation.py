@@ -86,8 +86,8 @@ def main() -> None:
     translate_gate(32)
 
     # Prophecy
-    # translate_gate(24)
-    # translate_gate(31)
+    translate_gate(24)
+    translate_gate(31)
 
 
 if __name__ == "__main__":
